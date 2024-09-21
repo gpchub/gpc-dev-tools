@@ -1,0 +1,8 @@
+{
+    "autoload": {
+        "psr-4": {
+            "GpcDev\\Includes\\": "includes",
+            "GpcDev\\Admin\\": "admin"
+        }
+    }
+}
