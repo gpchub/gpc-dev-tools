@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInitd751713988987e9331980363e24189ce
 {
     public static $prefixLengthsPsr4 = array (
+        'j' => 
+        array (
+            'joshtronic\\' => 11,
+        ),
         'G' => 
         array (
             'GpcDev\\Includes\\' => 16,
@@ -15,6 +19,10 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
     );
 
     public static $prefixDirsPsr4 = array (
+        'joshtronic\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joshtronic/php-loremipsum/src',
+        ),
         'GpcDev\\Includes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
