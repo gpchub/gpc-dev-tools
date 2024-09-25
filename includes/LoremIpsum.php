@@ -1,4 +1,5 @@
 <?php
+namespace GpcDev\Includes;
 
 /**
  * Lorem Ipsum Generator
@@ -12,10 +13,9 @@
  * @copyright Copyright 2014-2022 Josh Sherman
  * @license   http://www.opensource.org/licenses/mit-license.html
  * @link      https://github.com/joshtronic/php-loremipsum
+ *
+ * GPC: bỏ chức năng luôn bắt đầu bằng "Lorem ipsum..."
  */
-
-namespace joshtronic;
-
 class LoremIpsum
 {
     /**
@@ -26,7 +26,7 @@ class LoremIpsum
      * @access private
      * @var    mixed
      */
-    private $first = true;
+    private $first = false;
 
     /**
      * Words
@@ -186,7 +186,7 @@ class LoremIpsum
         $sentences = array();
 
         for ($i = 0; $i < $count; $i++) {
-            $sentences[] = $this->wordsArray($this->gauss(24.46, 5.08));
+            $sentences[] = $this->wordsArray($this->gauss(14.46, 5.08));
         }
 
         $this->punctuate($sentences);

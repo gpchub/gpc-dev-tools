@@ -6,7 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'joshtronic\\' => array($vendorDir . '/joshtronic/php-loremipsum/src'),
     'GpcDev\\Includes\\' => array($baseDir . '/includes'),
     'GpcDev\\Admin\\' => array($baseDir . '/admin'),
 );

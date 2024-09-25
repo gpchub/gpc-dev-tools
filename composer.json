@@ -1,7 +1,4 @@
 {
-    "require": {
-        "joshtronic/php-loremipsum": "dev-master"
-    },
     "autoload": {
         "psr-4": {
             "GpcDev\\Includes\\": "includes",

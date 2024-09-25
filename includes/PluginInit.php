@@ -6,6 +6,7 @@ use GpcDev\Admin\PageCreatePage;
 use GpcDev\Admin\PageCreatePost;
 use GpcDev\Admin\PageCreateProduct;
 use GpcDev\Admin\PageCreateTerm;
+use GpcDev\Admin\PageRandomPost;
 
 // Block direct access to file
 defined( 'ABSPATH' ) or die( 'Not Authorized!' );
@@ -57,6 +58,7 @@ class PluginInit
         new PageCreateTerm;
         new PageCreatePage;
         new PageCreatePost;
+        new PageRandomPost;
 
         if ( class_exists( 'woocommerce' ) ) {
             new PageCreateProduct;
@@ -77,7 +79,7 @@ class PluginInit
         );
 
         // create top level submenu page which point to main menu page
-        add_submenu_page(
+        $page = add_submenu_page(
             'gpc-dev-general', // parent slug
             __('General', GPC_DEV_TEXT_DOMAIN), // Page title
             __('General', GPC_DEV_TEXT_DOMAIN), // Menu title
@@ -85,6 +87,11 @@ class PluginInit
             'gpc-dev-general', // menu slug
             array($this, 'plugin_settings_page') // callback
         );
+
+        add_filter("gpc_dev_admin_pages", function($pages) use ($page) {
+            $pages[] = $page;
+            return $pages;
+        });
 
     	//call register settings function
     	add_action( 'admin_init', array($this, 'plugin_register_settings') );
@@ -142,76 +149,12 @@ class PluginInit
      */
     function plugin_settings_page() { ?>
 
-        <div class="wrap card">
-            <h1><?php _e( 'WordPress Plugin Starter', GPC_DEV_TEXT_DOMAIN ); ?></h1>
+        <div class="wrap card max-w-1/2">
+            <h1>GPC Dev tools</h1>
 
-            <p><?php _e( 'Welcome to WordPress Plugin Starter, a fast way to start building your plugins without create every time the project structure.', GPC_DEV_TEXT_DOMAIN ); ?></p>
+            <p>Tổng hợp các công cụ thường dùng khi làm Wordpress</p>
 
-        </div>
-
-    <?php }
-
-    /**
-     * Plugin support page
-     * in this page there are listed some useful debug informations
-     * and a quick link to write a mail to the plugin author
-     * @method plugin_support_page
-     */
-    function plugin_support_page() {
-
-        global $wpdb, $wp_version;
-        $plugin = get_plugin_data( GPC_DEV_FILE, true, true );
-        $wptheme = wp_get_theme();
-        $current_user = wp_get_current_user();
-
-        // set the user full name for the support request
-        $user_fullname = ($current_user->user_firstname || $current_user->user_lastname) ?
-        	($current_user->user_lastname . ' ' . $current_user->user_firstname) : $current_user->display_name;    ?>
-
-        <div class="wrap card">
-
-			<!-- support page title -->
-			<h1><?php _e( 'Plugin Starter Support', GPC_DEV_TEXT_DOMAIN ); ?></h1>
-
-            <!-- support page description -->
-			<p><?php _e( 'Please report this information when requesting support via mail.', GPC_DEV_TEXT_DOMAIN ); ?></p>
-
-			<div class="support-debug">
-
-				<div class="plugin">
-
-					<ul>
-						<li class="support-plugin-version"><strong><?php _e($plugin['Name']); ?></strong> version: <?php _e($plugin['Version']); ?></li>
-						<li class="support-credits"><?php _e( 'Plugin author:', GPC_DEV_TEXT_DOMAIN ); ?> <a href="<?php echo $plugin['AuthorURI']; ?>"><?php echo $plugin['AuthorName']; ?></a></li>
-					</ul>
-
-				</div>
-
-				<div class="theme">
-
-					<ul>
-						<li class="support-theme-version"><?php printf( _('Active theme %s version: %s', GPC_DEV_TEXT_DOMAIN), $wptheme->Name, $wptheme->Version ); ?></li>
-					</ul>
-
-				</div>
-
-				<div class="system">
-
-					<ul>
-						<li class="support-php-version"><?php _e( 'PHP version:', GPC_DEV_TEXT_DOMAIN ); ?> <?php _e(PHP_VERSION); ?></li>
-						<li class="support-mysql-version"><?php _e( 'MySQL version:', GPC_DEV_TEXT_DOMAIN ); ?> <?php _e( mysqli_get_server_info( $wpdb->dbh ) ); ?></li>
-						<li class="support-wp-version"><?php _e( 'WordPress version:', GPC_DEV_TEXT_DOMAIN ); ?> <?php _e($wp_version); ?></li>
-					</ul>
-
-				</div>
-
-			</div>
-
-            <div class="support-action">
-                <button type="button" class="button" name="Send Mail">
-                    <a style="text-decoration: none" href="mailto:someone@example.com?Subject=Plugin%20Support">Mail Me</a>
-                </button>
-            </div>
+            <p style="color: red">Nên Ngừng kích hoạt và Gỡ plugin này sau khi làm xong demo.</p>
 
         </div>
 
