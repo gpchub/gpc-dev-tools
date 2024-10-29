@@ -173,9 +173,13 @@ class PageCreateProduct
     ?>
         <div class="wrap card max-w-1/2 mb3">
             <h1>Import từ file csv</h1>
-            <p>Download file data mẫu <a href="https://docs.google.com/spreadsheets/d/16Cp-OE1giuPyulQRaKb5lvKjVCnmu0d3PPYiHsUxL5o/edit?usp=sharing" target="_blank">ở đây</a> (Chọn <code>File -> Download -> .csv</code>)</p>
+            <p>Download file data mẫu:</p>
+            <ul>
+                <li><a href="https://drive.google.com/file/d/1EwkNLhFXhrsCWYFFjC_6lcxrAHmv0n_n/view?usp=drive_link" target="_blank">Simple products</a></li>
+                <li><a href="https://drive.google.com/file/d/1WGljIR0HTMvFOb7JkwPj2zka3GUVlPBz/view?usp=drive_link" target="_blank">Sản phẩm có biến thể</a></li>
+            </ul>
             <p>Sau đó thực hiện import bằng công cụ của Woocommerce (<code>Sản phẩm -> Tất cả sản phẩm -> Nhập vào</code>)</p>
-            <p><mark>Giao diện trang quản lý của user thực hiện import phải là tiếng Việt</mark></p>
+            <p><mark>Nếu Woocommerce không tự nhận tên fields thì đổi giao diện trang quản lý của user thực hiện import sang tiếng Anh</mark></p>
         </div>
 
         <div class="wrap" x-data="app">
