@@ -6,6 +6,7 @@ use GpcDev\Admin\PageCreatePage;
 use GpcDev\Admin\PageCreatePost;
 use GpcDev\Admin\PageCreateProduct;
 use GpcDev\Admin\PageCreateTerm;
+use GpcDev\Admin\PageImportPost;
 use GpcDev\Admin\PageRandomPost;
 
 // Block direct access to file
@@ -59,6 +60,7 @@ class PluginInit
         new PageCreatePage;
         new PageCreatePost;
         new PageRandomPost;
+        new PageImportPost;
 
         if ( class_exists( 'woocommerce' ) ) {
             new PageCreateProduct;
