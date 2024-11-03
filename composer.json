@@ -4,5 +4,8 @@
             "GpcDev\\Includes\\": "includes",
             "GpcDev\\Admin\\": "admin"
         }
+    },
+    "require": {
+        "openspout/openspout": "^4.26"
     }
 }
