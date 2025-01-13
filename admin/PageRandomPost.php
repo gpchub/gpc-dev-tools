@@ -36,7 +36,7 @@ class PageRandomPost
         $count = $_POST['count'];
         $image_width = $_POST['image_width'];
         $image_height = $_POST['image_height'];
-        $post_type = 'post';
+        $post_type = $_POST['post_type'];
 
         $lipsum = new LoremIpsum();
         $picsum_ids = LoremPicsum::generate_image_ids($count);
@@ -80,12 +80,49 @@ class PageRandomPost
 
     public function settings_page()
     {
+        $builtin = [
+            'post' => [
+                'label' => __('Post'),
+                'name' => 'post',
+                'taxonomies' => [],
+            ],
+            'page' => [
+                'label' => __('Page'),
+                'name' => 'page',
+                'taxonomies' => [],
+            ],
+        ];
+
+        $post_types = get_post_types([
+            'public' => true,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            '_builtin' => false,
+        ], 'objects');
+
+        $post_types = array_merge($builtin, array_map(function($item) {
+            return [
+                'name' => $item->name,
+                'label' => $item->label,
+                'taxonomies' => [],
+            ];
+        }, $post_types));
+
         ?>
         <div class="wrap" x-data="app">
             <h1>Tạo bài viết ngẫu nhiên</h1>
 
             <div class="card mb3 max-w-full">
                 <div class="gpc-form gap-4">
+                    <div class="form-group">
+                        <label>Loại bài viết</label>
+                        <select x-model="post_type">
+                            <template x-for="item in postTypes">
+                                <option :value="item.name" x-text="item.label + ' (' + item.name + ')'" :select="item.name == post_type"></option>
+                            </template>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Số lượng</label>
                         <input type="number" x-model="count" class="w-25" />
@@ -117,6 +154,8 @@ class PageRandomPost
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('app', () => ({
+                    postTypes: <?php echo json_encode($post_types); ?>,
+                    post_type: 'post',
                     count: 15,
                     loading: false,
                     message: '',
@@ -133,6 +172,7 @@ class PageRandomPost
                         this.loading = true;
                         jQuery.post('<?php echo admin_url('admin-ajax.php'); ?>', {
                             action: 'gpc_create_random_posts',
+                            post_type: this.post_type,
                             count: this.count,
                             image_width: this.image_width,
                             image_height: this.image_height,

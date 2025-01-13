@@ -138,11 +138,11 @@ class PluginInit
      * @method plugin_enqueue_scripts
      */
     function plugin_enqueue_scripts() {
-        wp_register_style( 'gpc-dev-user-style', GPC_DEV_DIRECTORY_URL . '/assets/css/user-style.css', array(), null );
-        wp_register_script( 'gpc-dev-user-script', GPC_DEV_DIRECTORY_URL . '/assets/js/user-script.min.js', array(), null, true );
-        wp_enqueue_script('jquery');
-        wp_enqueue_style('gpc-dev-user-style');
-        wp_enqueue_script('gpc-dev-user-script');
+        // wp_register_style( 'gpc-dev-user-style', GPC_DEV_DIRECTORY_URL . '/assets/css/user-style.css', array(), null );
+        // wp_register_script( 'gpc-dev-user-script', GPC_DEV_DIRECTORY_URL . '/assets/js/user-script.min.js', array(), null, true );
+        // wp_enqueue_script('jquery');
+        // wp_enqueue_style('gpc-dev-user-style');
+        // wp_enqueue_script('gpc-dev-user-script');
     }
 
     /**
